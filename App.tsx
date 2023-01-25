@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'react-native';
 
 import { Home } from './src/screens/Home';
