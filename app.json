@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "contextmenu",
-    "slug": "contextmenu",
+    "name": "Notes",
+    "slug": "contextmenuNotes",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

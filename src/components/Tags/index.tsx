@@ -9,7 +9,7 @@ export type TagsProps = {
 }
 type Props = {
   data: TagsProps[];
-  onRemove: (tag: string) => void;
+  onRemove: () => void;
 };
 
 export function Tags({ data, onRemove }: Props) {
@@ -17,8 +17,7 @@ export function Tags({ data, onRemove }: Props) {
     <View style={styles.container}>
       {data.map(tag => (
 
-
-        <Tag key={tag.id} title={tag.title} onRemove={() => onRemove(tag.title)} />
+        <Tag key={tag.id} title={tag.title} tagId={tag.id} onRemove={onRemove} />
 
       ))}
     </View>

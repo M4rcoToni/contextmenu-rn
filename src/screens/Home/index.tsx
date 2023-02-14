@@ -1,8 +1,9 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Alert, Text, View } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 import uuid from 'react-native-uuid';
 import Toast from 'react-native-toast-message';
+import Animated, { FadeIn, FadeOut, Layout } from 'react-native-reanimated';
 
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
@@ -16,7 +17,7 @@ import { TagsProps } from '../../components/Tags/index';
 export function Home() {
   const [tags, setTags] = useState<TagsProps[]>([]);
   const [title, setNewTag] = useState('');
-  const [saveTag, setSaveNewTag] = useState('');
+  const { getItem, setItem } = useAsyncStorage("@contextmenu");
 
 
 
@@ -30,12 +31,12 @@ export function Home() {
 
     try {
       if (newTagData.title.length > 0) {
-        const response = await AsyncStorage.getItem("@contextmenu");
+        const response = await getItem();
         const previousData = response ? JSON.parse(response) : [];
 
         const data = [...previousData, newTagData]
 
-        await AsyncStorage.setItem("@contextmenu", JSON.stringify(data));
+        await setItem(JSON.stringify(data));
 
         Toast.show({
           type: 'success',
@@ -57,7 +58,7 @@ export function Home() {
   async function handleShowTag() {
 
     try {
-      const response = await AsyncStorage.getItem("@contextmenu");
+      const response = await getItem();
       const data = response ? JSON.parse(response) : [];
 
       setTags(data);
@@ -65,14 +66,10 @@ export function Home() {
 
     } catch (error) {
       console.log(error);
-
     }
     setNewTag('');
   }
 
-  async function handleRemoveTag() {
-    const response = await AsyncStorage.removeItem("@contextmenu");
-  }
 
   return (
     <View style={styles.container}>
@@ -82,19 +79,21 @@ export function Home() {
       </View>
 
       <Text style={styles.title}>Tags</Text>
-
-
-
-
-      <Tags data={tags} onRemove={handleRemoveTag} />
-
-      {/* <Tags title={tags.title} onRemove={handleRemoveTag} /> */}
-
-      <Button colors='yellow' onPress={handleShowTag} />
+      {
+        tags.length ?
+          <Tags data={tags} onRemove={() => handleShowTag()} />
+          :
+          (<Animated.Text
+            layout={Layout}
+            entering={FadeIn}
+            exiting={FadeOut}
+            style={styles.empty}>
+            Nenhuma Tag Salva
+          </Animated.Text>)
+      }
 
       <View style={{ alignItems: 'flex-end' }}>
 
-        <Button colors="red" onPress={handleRemoveTag} />
       </View>
 
     </View>

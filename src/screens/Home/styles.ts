@@ -18,4 +18,9 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#FFFFFF',
   },
+  empty: {
+    marginTop: 24,
+    fontSize: 16,
+    color: '#FFFFFF',
+  },
 });
