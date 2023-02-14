@@ -4,26 +4,8 @@ import { HoldMenuProvider } from 'react-native-hold-menu';
 import { Home } from './src/screens/Home';
 import { Feather } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message';
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 export default function App() {
-  const { getItem, setItem } = useAsyncStorage("@contextmenu");
-
-  async function handleShowTag() {
-
-    try {
-      const response = await getItem();
-      const data = response ? JSON.parse(response) : [];
-
-      setItem(JSON.stringify(data));
-
-      console.log(data);
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  handleShowTag();
 
   return (
     <HoldMenuProvider theme='dark' iconComponent={Feather}>
