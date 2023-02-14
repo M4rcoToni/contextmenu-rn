@@ -17,7 +17,7 @@ export default function App() {
 
       setItem(JSON.stringify(data));
 
-      console.log("app");
+      console.log(data);
 
     } catch (error) {
       console.log(error);

@@ -70,12 +70,15 @@ export function Home() {
     setNewTag('');
   }
 
+  useEffect(() => {
+    handleShowTag();
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.form}>
         <Input placeholder="Nova tag" onChangeText={setNewTag} value={title} />
-        <Button colors='green' onPress={handleSaveTag} />
+        <Button colors='yellow' onPress={handleSaveTag} />
       </View>
 
       <Text style={styles.title}>Tags</Text>
