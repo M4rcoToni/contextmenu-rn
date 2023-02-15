@@ -14,6 +14,7 @@
     "@types/react-native": "~0.70.6",
     "expo": "~47.0.9",
     "expo-blur": "~12.0.1",
+    "expo-cli": "^6.3.1",
     "expo-haptics": "~12.0.1",
     "expo-status-bar": "~1.4.2",
     "react": "18.1.0",
@@ -24,7 +25,8 @@
     "react-native-toast-message": "^2.1.5",
     "react-native-unimodules": "^0.14.10",
     "react-native-uuid": "^2.0.1",
-    "typescript": "^4.6.3"
+    "typescript": "^4.6.3",
+    "expo-updates": "~0.15.6"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
